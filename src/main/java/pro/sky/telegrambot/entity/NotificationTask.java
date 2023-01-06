@@ -49,17 +49,17 @@ public class NotificationTask {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof NotificationTask)) return false;
         NotificationTask that = (NotificationTask) o;
-        return Objects.equals(id, that.id) && Objects.equals(chatId, that.chatId) && Objects.equals(notification_text, that.notification_text) && Objects.equals(data_time, that.data_time);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getChatId(), that.getChatId()) && Objects.equals(getNotification_text(), that.getNotification_text()) && Objects.equals(getData_time(), that.getData_time());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, chatId, notification_text, data_time);
+        return Objects.hash(getId(), getChatId(), getNotification_text(), getData_time());
     }
-
-    @Override
+}
+  /*  @Override
     public String toString() {
         return "NotificationTask{" +
                 "id=" + id +
@@ -67,5 +67,5 @@ public class NotificationTask {
                 ", Notification_Text='" + notification_text + '\'' +
                 ", data_time=" + data_time +
                 '}';
-    }
-}
+    }*/
+
