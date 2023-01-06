@@ -27,37 +27,40 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
         this.repository = repository;
         this.telegramBot = telegramBot;
     }
+
     @PostConstruct
     public void init() {
         telegramBot.setUpdatesListener(this);
     }
-           @Override
-            public int process(List<Update> updates) {
-                updates.forEach(update -> {
-                    logger.info("Processing update: {}", update);
-                    long chatId = (update.message().chat().id());
-                    var updateMassage = update.message().text();
-                    if (updateMassage == null) {
-                        updateMassage = "";
-                    }
-                    updateMassage = updateMassage.toLowerCase();
-                    if ("/start".equals(updateMassage)) {
-                        var message = new SendMessage(chatId, "Добро пожаловать");
-                        telegramBot.execute(message);
-                    }
-                    var pattern = Pattern.compile("([0-9\\.\\:\\s]{16})(\\s)([\\W+]+)");
-                    var matcher = pattern.matcher(updateMassage);
-                    if (matcher.matches()) {
-                        var date = matcher.group(1);
-                        var message = matcher.group(3);
-                        var timeToSendNotification = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
-                        var entity = new NotificationTask();
-                        entity.setData_time(timeToSendNotification.withNano(0).withSecond(0));
-                        entity.setChatId(chatId);
-                        entity.setNotification_text(message);
-                        repository.save(entity);
-                    }
-                });
-                return UpdatesListener.CONFIRMED_UPDATES_ALL;
+
+    @Override
+    public int process(List<Update> updates) {
+        updates.forEach(update -> {
+            logger.info("Processing update: {}", update);
+            long chatId = (update.message().chat().id());
+            var updateMassage = update.message().text();
+            if (updateMassage == null) {
+                updateMassage = "";
             }
-        }
+            updateMassage = updateMassage.toLowerCase();
+            if ("/start".equals(updateMassage)) {
+                var message = new SendMessage(chatId, "Добро пожаловать");
+                telegramBot.execute(message);
+            }
+            var pattern = Pattern.compile("([0-9\\.\\:\\s]{16})(\\s)([\\W+]+)");
+            var matcher = pattern.matcher(updateMassage);
+            if (matcher.matches()) {
+                var date = matcher.group(1);
+                var message = matcher.group(3);
+                var timeToSendNotification = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
+                var entity = new NotificationTask();
+                entity.setData_time(timeToSendNotification.withNano(0).withSecond(0));
+                entity.setChatid(chatId);
+                entity.setNotification_text(message);
+                repository.save(entity);
+            }
+        });
+        return UpdatesListener.CONFIRMED_UPDATES_ALL;
+    }
+
+}

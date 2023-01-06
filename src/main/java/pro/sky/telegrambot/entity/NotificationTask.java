@@ -10,7 +10,7 @@ public class NotificationTask {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Long chatId;
+    private Long chatid;
     private String notification_text;
     private LocalDateTime data_time;
 
@@ -22,12 +22,12 @@ public class NotificationTask {
         this.id = id;
     }
 
-    public Long getChatId() {
-        return chatId;
+    public Long getChatid() {
+        return chatid;
     }
 
-    public void setChatId(Long chatId) {
-        this.chatId = chatId;
+    public void setChatid(Long chatid) {
+        this.chatid = chatid;
     }
 
     public String getNotification_text() {
@@ -49,17 +49,17 @@ public class NotificationTask {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof NotificationTask)) return false;
         NotificationTask that = (NotificationTask) o;
-        return Objects.equals(id, that.id) && Objects.equals(chatId, that.chatId) && Objects.equals(notification_text, that.notification_text) && Objects.equals(data_time, that.data_time);
+        return Objects.equals(getId(), that.getId()) && Objects.equals(getChatid(), that.getChatid()) && Objects.equals(getNotification_text(), that.getNotification_text()) && Objects.equals(getData_time(), that.getData_time());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, chatId, notification_text, data_time);
+        return Objects.hash(getId(), getChatid(), getNotification_text(), getData_time());
     }
-
-    @Override
+}
+  /*  @Override
     public String toString() {
         return "NotificationTask{" +
                 "id=" + id +
@@ -67,5 +67,5 @@ public class NotificationTask {
                 ", Notification_Text='" + notification_text + '\'' +
                 ", data_time=" + data_time +
                 '}';
-    }
-}
+    }*/
+
