@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TelegramBotConfiguration {
 
-    @Value("5950790591:AAHtlC7-YwVqz9k0Dkip4vy8vhteRVWs6Pk")
+    @Value("5968505306:AAHnOrNZTiJQihyNFC2gUbmasyfsncZtuCU")
     private String token;
 
     @Bean

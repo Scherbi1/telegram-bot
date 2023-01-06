@@ -21,7 +21,7 @@ public class TelegramEventScheduler {
     public void run() {
         repository.findAll().stream()
                 .filter(en -> LocalDateTime.now().withNano(0).withSecond(0).isEqual(en.getData_time()))
-                .forEach(en -> telegramBot.execute(new SendMessage(en.getChatId(), en.getNotification_text())));
+                .forEach(en -> telegramBot.execute(new SendMessage(en.getChatid(), en.getNotification_text())));
     }
     }
 

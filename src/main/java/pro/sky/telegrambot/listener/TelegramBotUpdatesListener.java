@@ -55,7 +55,7 @@ public class TelegramBotUpdatesListener implements UpdatesListener {
                 var timeToSendNotification = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd.MM.yyyy HH:mm"));
                 var entity = new NotificationTask();
                 entity.setData_time(timeToSendNotification.withNano(0).withSecond(0));
-                entity.setChatId(chatId);
+                entity.setChatid(chatId);
                 entity.setNotification_text(message);
                 repository.save(entity);
             }
